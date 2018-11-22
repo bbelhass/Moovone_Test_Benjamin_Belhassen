@@ -1,0 +1,34 @@
+<div style="display : flex; flex-wrap: nowrap">
+  <div>
+    <app-userinfo [albumNumber]="albumNumber"></app-userinfo>
+  </div>
+  <div style="display : flex; flex-wrap: wrap" *ngIf="result">
+    <div style="cursor:pointer; margin: 10px;" id=imglist *ngFor="let picUrl of result; let j = index">
+      <img (click)="openDetailledCollection($event,'custom-modal-2')" id={{j}} src={{picUrl.image_url}} />
+    </div><br>
+  </div>
+</div>
+
+<app-collection-detailled-dialog id="custom-modal-2">
+  <div class="modal">
+    <div class="modal-body">
+      <div style="display : flex; flex-wrap: wrap">
+        <div style="margin-right: 50px;">
+          <img src={{detailled_info.image_url}} />
+        </div>
+        <div>
+          <h1><a href={{detailled_info.url}} title="Go to the movie website" target="_blank">{{detailled_info.title}}</a></h1>
+          <h3>Note: {{detailled_info.score +"/10"}}</h3>
+          <h3>Type: {{detailled_info.type}}</h3>
+          <h3>Nombre d'épisodes: {{detailled_info.episodes}}</h3>
+          <h3>Categorie: {{detailled_info.rated}}</h3>
+          <h3>En diffusion: {{(detailled_info.airing)?"Oui":"Non"}}</h3>
+          <h3>Membres: {{detailled_info.members}}</h3>
+        </div>
+      </div>
+      <h3>Synopsis: {{detailled_info.synopsis}}</h3>
+      <button (click)="closeDetailledCollection('custom-modal-2');">Close</button>
+    </div>
+  </div>
+  <div class="modal-background"></div>
+</app-collection-detailled-dialog>
